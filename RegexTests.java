@@ -99,7 +99,7 @@ public class RegexTests {
         ans.add(new Answer("c", 2));
         ans.add(new Answer("ab", 0));
         ans.add(new Answer("bc", 1));
-        ans.add(new Answer("abc", 1));
+        ans.add(new Answer("abc", 0));
         assertEquals(ans, Regex.find(starText, pattern));
     }
     
