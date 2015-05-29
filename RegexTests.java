@@ -135,4 +135,13 @@ public class RegexTests {
         ans.add(new Answer("binfoofoosuperdupe", 9));
         assertEquals(ans, Regex.find(text, pattern));
     }
+    
+    @Test (timeout = TIMEOUT)
+    public void testComplexPattern() {
+        String pattern = "?bar*bi*f?*e";
+        Set<Answer> ans = new HashSet<Answer>();
+        ans.add(new Answer("obarbazbinfoofoosupe", 2));
+        ans.add(new Answer("obarbazbinfoofoosuperdupe", 2));
+        assertEquals(ans, Regex.find(text, pattern));
+    }
 }

@@ -24,7 +24,7 @@ public class Regex {
         int tPoint = curr;
         int pPoint = currP;
         String sub = s;
-        while (curr <= text.length() - pattern.length()) {
+        while (curr <= text.length() - pattern.length() + pPoint - 1) {
             tPoint = curr;
             pPoint = currP;
             if (orig != -1) {
@@ -44,10 +44,18 @@ public class Regex {
                         String temp = sub;
                         for (int i = tPoint; i < text.length(); i += 1) {
                             temp += text.charAt(i);
-                            result.add(new Answer(temp, curr));
+                            if (orig != -1) {
+                                result.add(new Answer(temp, orig));
+                            } else {
+                                result.add(new Answer(temp, curr));
+                            }
                         }
                     } else {
-                        match(text, pattern, result, curr, tPoint, pPoint, sub);
+                        if (orig == -1) {
+                            match(text, pattern, result, curr, tPoint, pPoint, sub);
+                        } else {
+                            match(text, pattern, result, orig, tPoint, pPoint, sub);
+                        }
                     }
                 }
             }
@@ -63,7 +71,7 @@ public class Regex {
     }
     
     public static void main(String[] args) {
-        Set<Answer> s = Regex.find("abc", "*");
+        Set<Answer> s = Regex.find("foobarbazbinfoofoosuperduperfly", "bi*fo*pe");
         for (Answer ans : s) {
             System.out.println(ans);
         }
